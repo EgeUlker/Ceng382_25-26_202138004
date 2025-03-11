@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Information</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Class Information</h1>
+
+        <form id="classForm">
+            <input type="text" id="className" placeholder="Class Name" required>
+            <input type="number" id="numPeople" placeholder="Number of People" required>
+            <textarea id="description" placeholder="Description" required></textarea>
+            <button type="submit">Add Class</button>
+        </form>
+
+        <table border="1" id="classTable">
+            <thead>
+                <tr>
+                    <th>Class Name</th>
+                    <th>Number of People</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('classForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const className = document.getElementById('className').value;
+            const numPeople = document.getElementById('numPeople').value;
+            const description = document.getElementById('description').value;
+
+            const tableBody = document.querySelector('#classTable tbody');
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                <td>${className}</td>
+                <td>${numPeople}</td>
+                <td>${description}</td>
+                <td><button class="deleteBtn">Delete</button></td>
+            `;
+
+            tableBody.appendChild(newRow);
+
+        
+            document.getElementById('classForm').reset();
+        });
+
+        document.getElementById('classTable').addEventListener('click', function(event) {
+            if (event.target.classList.contains('deleteBtn')) {
+                event.target.parentElement.parentElement.remove();
+            }
+        });
+
+        
+        document.getElementById('className').addEventListener('focus', function() {
+            this.style.backgroundColor = 'lightyellow';
+        });
+
+        document.getElementById('numPeople').addEventListener('mouseover', function() {
+            this.style.border = '2px solid red';
+        });
+
+        document.getElementById('numPeople').addEventListener('mouseout', function() {
+            this.style.border = '';
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: 'Press Start 2P', cursive;
+        background: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png') no-repeat center center;
+        background-size: 50%;
+        background-color: black;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+        animation: moveBackground 4s infinite alternate ease-in-out;
+    }
+
+    .container {
+        padding: 50px;
+        position: relative;
+        z-index: 2;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        margin: 20px auto;
+    }
+
+    form input, form textarea {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    form button {
+        width: 85%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: yellow;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    form button:hover {
+        background: orange;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        border-radius: 10px;
+    }
+
+    table th, table td {
+        padding: 10px;
+    }
+
+    table th {
+        background: rgba(255, 255, 0, 0.8);
+        color: black;
+    }
+
+    .deleteBtn {
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .deleteBtn:hover {
+        background: darkred;
+    }
+
+    @keyframes moveBackground {
+        0% {
+            background-position: left center;
+        }
+        100% {
+            background-position: right center;
+        }
+    }
+</style>
