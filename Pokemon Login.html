@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="pokeball-container">
+        <img id="pokeball" src="https://upload.wikimedia.org/wikipedia/commons/3/39/Pokeball.PNG" alt="Poké Ball">
+    </div>
+
+    <div class="container" id="login-container" style="display: none;">
+        <h1>Pokémon Login</h1>
+        <div class="login-box">
+            <div id="clock"></div>
+            <input type="text" id="username" placeholder="User Name">
+            <input type="password" id="password" placeholder="Password">
+            <button id="loginButton">Enter</button>
+            <p id="errorMessage" style="color: red; display: none;">Invalid credentials!</p>
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const clock = document.getElementById('clock');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'H' || event.key === 'h') {
+                const forms = document.querySelectorAll('.login-box input, .login-box button');
+                forms.forEach(form => {
+                    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                });
+            }
+        });
+
+        document.getElementById('pokeball').addEventListener('click', function() {
+            document.getElementById('pokeball-container').style.display = 'none'; // Topu gizle
+            document.getElementById('login-container').style.display = 'block'; // Login ekranını göster
+        });
+
+        document.getElementById('loginButton').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === 'admin') {
+                window.location.href = 'table.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: 'Press Start 2P', cursive;
+        background: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png') no-repeat center center;
+        background-size: 50%;
+        background-color: black;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+        animation: moveBackground 4s infinite alternate ease-in-out;
+    }
+
+    /* Pokémon Topu */
+    #pokeball-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    #pokeball {
+        width: 150px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #pokeball:hover {
+        transform: scale(1.1);
+    }
+
+    /* Login Ekranı */
+    .container {
+        padding: 50px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .login-box {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        margin: 100px auto;
+        position: relative;
+        z-index: 3;
+    }
+
+    .login-box input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .login-box button {
+        width: 85%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: yellow;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .login-box button:hover {
+        background: orange;
+    }
+
+    #clock {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    @keyframes moveBackground {
+        0% {
+            background-position: left center;
+        }
+        100% {
+            background-position: right center;
+        }
+    }
+</style>
