@@ -1,24 +1,22 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddRazorPages();
+
+// **Session Middleware ekleme**
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session süresi
+    options.Cookie.HttpOnly = true; // Güvenlik için sadece HTTP üzerinden erişilebilir olmalı
+    options.Cookie.IsEssential = true; // Session çerezlerinin gerekli olduğunu belirt
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-
+app.UseSession(); // **Session aktif hale getir!**
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
