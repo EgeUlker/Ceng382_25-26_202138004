@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model lab5.Pages.IndexModel
 @{
     ViewData["Title"] = "Class List";
@@ -8,64 +8,85 @@
 
 <div class="container">
     <div class="row">
-        <!-- Sol: Form -->
+        <!-- Sol: Yeni Sınıf Ekleme Formu -->
         <div class="col-md-6">
+            <h2>Add New Class</h2>
             <form method="post">
                 <div class="mb-3">
-                    <label for="className" class="form-label">Class Name:</label>
-                    <input type="text" id="className" name="NewClass.ClassName" class="form-control" />
-                    <span class="text-danger" asp-validation-for="NewClass.ClassName"></span>
+                    <label class="form-label">Class Name:</label>
+                    <input type="text" asp-for="NewClass.ClassName" class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label for="studentCount" class="form-label">Student Count:</label>
-                    <input type="number" id="studentCount" name="NewClass.StudentCount" class="form-control" />
-                    <span class="text-danger" asp-validation-for="NewClass.StudentCount"></span>
+                    <label class="form-label">Student Count:</label>
+                    <input type="number" asp-for="NewClass.StudentCount" class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description:</label>
-                    <textarea id="description" name="NewClass.Description" class="form-control"></textarea>
-                    <span class="text-danger" asp-validation-for="NewClass.Description"></span>
+                    <label class="form-label">Description:</label>
+                    <textarea asp-for="NewClass.Description" class="form-control"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" asp-page-handler="Add">Add</button>
             </form>
         </div>
 
-        <!-- Sağ: Tablo -->
+        <!-- Sağ: Mevcut Sınıflar ve Sayfalama -->
         <div class="col-md-6">
             <h2>Existing Classes</h2>
-            @if (lab5.Pages.IndexModel.Classes.Any())
+
+            @if (Model.ClassData.Any())
             {
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Class Name</th>
+                            <th>Instructor</th>
+                            <th>Start Date</th>
                             <th>Student Count</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var classInfo in lab5.Pages.IndexModel.Classes)
+                        @foreach (var classInfo in Model.ClassData)
                         {
                             <tr>
-                                <td>@classInfo.Id</td>
                                 <td>@classInfo.ClassName</td>
+                                <td>@classInfo.Instructor</td>
+                                <td>@classInfo.StartDate.ToString("yyyy-MM-dd")</td>
                                 <td>@classInfo.StudentCount</td>
                                 <td>@classInfo.Description</td>
                             </tr>
                         }
                     </tbody>
                 </table>
+
+                <!-- Sayfalama -->
+                <div class="mt-3 text-center">
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <!-- Önceki Sayfa -->
+                            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                <a class="page-link" asp-page="/Index" asp-route-PageNumber="@(Model.PageNumber - 1)">Previous</a>
+                            </li>
+
+                            <!-- Sayfa Numaraları -->
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                                    <a class="page-link" asp-page="/Index" asp-route-PageNumber="@i">@i</a>
+                                </li>
+                            }
+
+                            <!-- Sonraki Sayfa -->
+                            <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                                <a class="page-link" asp-page="/Index" asp-route-PageNumber="@(Model.PageNumber + 1)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             }
             else
             {
-                <p>No classes have been added yet.</p>
+                <p class="text-muted">No classes available.</p>
             }
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <!-- Validation Scripts -->
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
