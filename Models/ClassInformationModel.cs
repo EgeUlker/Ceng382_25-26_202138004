@@ -1,20 +1,34 @@
-namespace lab5.Models
+using System;
+
+namespace lab7.Models
 {
     public class ClassInformationModel
     {
-        public int Id { get; set; } // Benzersiz kimlik numarası (auto-incremented)
+        public int ID { get; set; }
+        public string ClassName { get; set; }
+        public string Instructor { get; set; }
+        public DateTime StartDate { get; set; }
+        public int StudentCount { get; set; }
+        public string Description { get; set; }
 
-        public string ClassName { get; set; } // Sınıfın adı
-
-        public int StudentCount { get; set; } // Sınıftaki öğrenci sayısı
-
-        public string Description { get; set; } // Sınıf açıklaması
-
-        // Constructor ile varsayılan değerlerin tanımlanması (isteğe bağlı)
+        // Parametresiz constructor (Entity Framework için de gereklidir)
         public ClassInformationModel()
         {
-            ClassName = string.Empty;
-            Description = string.Empty;
+            ClassName = "Default Class Name";
+            Instructor = "Default Instructor";
+            Description = "Default Description";
+            StartDate = DateTime.Now;
+            StudentCount = 0;
+        }
+
+        // Tüm özellikleri alan constructor (kullanım tercihinize göre)
+        public ClassInformationModel(string className, string instructor, DateTime startDate, int studentCount, string description)
+        {
+            ClassName = className;
+            Instructor = instructor;
+            StartDate = startDate;
+            StudentCount = studentCount;
+            Description = description;
         }
     }
 }
