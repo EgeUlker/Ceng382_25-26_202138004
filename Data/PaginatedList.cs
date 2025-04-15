@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace lab7.Data
+namespace lab8.Data
 {
     public class PaginatedList<T> : List<T>
     {

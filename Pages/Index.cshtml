@@ -1,74 +1,105 @@
 ﻿@page
-@model lab7.Pages.IndexModel
+@model lab8.Pages.IndexModel
 @{
     ViewData["Title"] = "Class Information";
 }
 
-<!-- En Üstte 'Add New Class' Bağlantısı -->
-<a asp-page="/Create" style="display:inline-block; margin-bottom:10px;">Add New Class</a>
+<div class="container mt-4">
+    <!-- Üst kısım: "Add New Class" butonu ve başlık -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a asp-page="/Create" class="btn btn-success">Add New Class</a>
+        <h1 class="mb-0">Class Information Table</h1>
+    </div>
 
-<h1>Class Information Table</h1>
+    <!-- Filtreleme Formu -->
+    <form method="get" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="searchTerm" value="@Model.searchTerm" class="form-control" placeholder="Enter Class Name" />
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
 
-<!-- Filtreleme Formu -->
-<form method="get">
-    <input type="text" name="searchTerm" value="@Model.searchTerm" placeholder="Enter Class Name" />
-    <button type="submit">Filter</button>
-</form>
+    <!-- JSON Dışa Aktarma Butonları -->
+    <div class="mb-3">
+        <form method="post" asp-page-handler="ExportJson" class="d-inline-block me-2">
+            <input type="hidden" name="isFiltered" value="false" />
+            <button type="submit" class="btn btn-outline-secondary">Export All to JSON</button>
+        </form>
+        <form method="post" asp-page-handler="ExportJson" class="d-inline-block">
+            <input type="hidden" name="isFiltered" value="true" />
+            <button type="submit" class="btn btn-outline-secondary">Export Filtered to JSON</button>
+        </form>
+    </div>
 
-<!-- JSON Dışa Aktarma Butonları -->
-<form method="post" asp-page-handler="ExportJson" style="display:inline-block;">
-    <input type="hidden" name="isFiltered" value="false" />
-    <button type="submit">Export All to JSON</button>
-</form>
-<form method="post" asp-page-handler="ExportJson" style="display:inline-block; margin-left:10px;">
-    <input type="hidden" name="isFiltered" value="true" />
-    <button type="submit">Export Filtered to JSON</button>
-</form>
-
-<!-- Kayıtların Gösterildiği Tablo (ID alanı görünmüyor) -->
-<table border="1" style="margin-top:20px; width:100%; border-collapse:collapse;">
-    <thead>
-        <tr>
-            <th>Class Name</th>
-            <th>Instructor</th>
-            <th>Start Date</th>
-            <th>Student Count</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ClassInformationModelList)
-        {
+    <!-- Kayıtların Gösterildiği Tablo -->
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
             <tr>
-                <td>@item.ClassName</td>
-                <td>@item.Instructor</td>
-                <td>@(item.StartDate != default ? item.StartDate.ToString("dd/MM/yyyy") : "")</td>
-                <td>@item.StudentCount</td>
-                <td>@item.Description</td>
+                <th>Class Name</th>
+                <th>Instructor</th>
+                <th>Start Date</th>
+                <th>Student Count</th>
+                <th>Description</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ClassInformationModelList)
+            {
+                <tr>
+                    <td>@item.ClassName</td>
+                    <td>@item.Instructor</td>
+                    <td>@(item.StartDate != default ? item.StartDate.ToString("dd/MM/yyyy") : "")</td>
+                    <td>@item.StudentCount</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<!-- Sayfalama Navigasyonu -->
-<div style="margin-top:20px;">
-    @if (Model.ClassInformationModelList.HasPreviousPage)
-    {
-        <a asp-route-pageIndex="@(Model.ClassInformationModelList.PageIndex - 1)" asp-route-searchTerm="@Model.searchTerm">Previous</a>
-    }
-    @for (int i = 1; i <= Model.ClassInformationModelList.TotalPages; i++)
-    {
-        if (i == Model.ClassInformationModelList.PageIndex)
-        {
-            <strong style="margin:0 5px;">@i</strong>
-        }
-        else
-        {
-            <a asp-route-pageIndex="@i" asp-route-searchTerm="@Model.searchTerm" style="margin:0 5px;">@i</a>
-        }
-    }
-    @if (Model.ClassInformationModelList.HasNextPage)
-    {
-        <a asp-route-pageIndex="@(Model.ClassInformationModelList.PageIndex + 1)" asp-route-searchTerm="@Model.searchTerm">Next</a>
-    }
+    <!-- Sayfalama Navigasyonu -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if (Model.ClassInformationModelList.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-pageIndex="@(Model.ClassInformationModelList.PageIndex - 1)" asp-route-searchTerm="@Model.searchTerm">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.ClassInformationModelList.TotalPages; i++)
+            {
+                if (i == Model.ClassInformationModelList.PageIndex)
+                {
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-route-pageIndex="@i" asp-route-searchTerm="@Model.searchTerm">@i</a>
+                    </li>
+                }
+            }
+
+            @if (Model.ClassInformationModelList.HasNextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-pageIndex="@(Model.ClassInformationModelList.PageIndex + 1)" asp-route-searchTerm="@Model.searchTerm">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">Next</span>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>

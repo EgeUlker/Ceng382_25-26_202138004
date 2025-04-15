@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using lab7.Data;
-using lab7.Helpers;
-using lab7.Models;
+using lab8.Data;
+using lab8.Helpers;
+using lab8.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace lab7.Pages
+namespace lab8.Pages
 {
     public class IndexModel : PageModel
     {

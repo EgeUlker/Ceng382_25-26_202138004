@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a9tt9LLVBcw=",
+  "dgSpecHash": "GCOC0RbSrLY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\egeum\\Desktop\\lab7\\lab5.csproj",
+  "projectFilePath": "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\egeum\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\egeum\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

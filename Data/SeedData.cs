@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using lab7.Models;
+using lab8.Models;
 
-namespace lab7.Data
+namespace lab8.Data
 {
     public static class SeedData
     {

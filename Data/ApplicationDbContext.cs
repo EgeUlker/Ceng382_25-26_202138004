@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using lab7.Models;
+using lab8.Models;
 
-namespace lab7.Data
+namespace lab8.Data
 {
     public class ApplicationDbContext : DbContext
     {

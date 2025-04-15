@@ -1,6 +1,6 @@
 using System;
 
-namespace lab7.Models
+namespace lab8.Models
 {
     public class ClassInformationModel
     {

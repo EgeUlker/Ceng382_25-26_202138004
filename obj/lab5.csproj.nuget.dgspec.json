@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\egeum\\Desktop\\lab7\\lab5.csproj": {}
+    "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj": {}
   },
   "projects": {
-    "C:\\Users\\egeum\\Desktop\\lab7\\lab5.csproj": {
+    "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\egeum\\Desktop\\lab7\\lab5.csproj",
+        "projectUniqueName": "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj",
         "projectName": "lab5",
-        "projectPath": "C:\\Users\\egeum\\Desktop\\lab7\\lab5.csproj",
+        "projectPath": "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj",
         "packagesPath": "C:\\Users\\egeum\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\egeum\\Desktop\\lab7\\obj\\",
+        "outputPath": "C:\\Users\\egeum\\Desktop\\lab8\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\egeum\\AppData\\Roaming\\NuGet\\NuGet.Config"
