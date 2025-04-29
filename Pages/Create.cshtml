@@ -1,42 +1,45 @@
 @page
-@model lab8.Pages.CreateModel
+@model lab9.Pages.CreateModel
 @{
-    ViewData["Title"] = "Create Class";
+    ViewData["Title"] = "Yeni Kayıt Ekle";
 }
 
-<h1>Create Class</h1>
-
-<form method="post">
-    <div>
-        <label asp-for="ClassInformation.ClassName"></label>
-        <input asp-for="ClassInformation.ClassName" />
-        <span asp-validation-for="ClassInformation.ClassName"></span>
+<div class="card form-card">
+    <div class="card-body">
+        <h2 class="card-title text-center mb-4">Yeni Kayıt Ekle</h2>
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="ClassInformation.ClassName" class="form-label">Sınıf Adı</label>
+                <input asp-for="ClassInformation.ClassName" class="form-control" placeholder="Örn: Fizik 101" />
+                <span asp-validation-for="ClassInformation.ClassName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClassInformation.Instructor" class="form-label">Öğretmen</label>
+                <input asp-for="ClassInformation.Instructor" class="form-control" placeholder="Örn: Prof. Dr. Ahmet Yılmaz" />
+                <span asp-validation-for="ClassInformation.Instructor" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClassInformation.StartDate" class="form-label">Başlangıç Tarihi</label>
+                <input asp-for="ClassInformation.StartDate" type="date" class="form-control" />
+                <span asp-validation-for="ClassInformation.StartDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClassInformation.StudentCount" class="form-label">Öğrenci Sayısı</label>
+                <input asp-for="ClassInformation.StudentCount" type="number" min="0" class="form-control" placeholder="Örn: 30" />
+                <span asp-validation-for="ClassInformation.StudentCount" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ClassInformation.Description" class="form-label">Açıklama</label>
+                <textarea asp-for="ClassInformation.Description" class="form-control" rows="4" placeholder="Kısa bir açıklama giriniz"></textarea>
+                <span asp-validation-for="ClassInformation.Description" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary me-3">Oluştur</button>
+                <a asp-page="/Index" class="btn btn-outline-light">Listeye Dön</a>
+            </div>
+        </form>
     </div>
-    <div>
-        <label asp-for="ClassInformation.Instructor"></label>
-        <input asp-for="ClassInformation.Instructor" />
-        <span asp-validation-for="ClassInformation.Instructor"></span>
-    </div>
-    <div>
-        <label asp-for="ClassInformation.StartDate"></label>
-        <input asp-for="ClassInformation.StartDate" type="date" />
-        <span asp-validation-for="ClassInformation.StartDate"></span>
-    </div>
-    <div>
-        <label asp-for="ClassInformation.StudentCount"></label>
-        <input asp-for="ClassInformation.StudentCount" type="number" />
-        <span asp-validation-for="ClassInformation.StudentCount"></span>
-    </div>
-    <div>
-        <label asp-for="ClassInformation.Description"></label>
-        <input asp-for="ClassInformation.Description" />
-        <span asp-validation-for="ClassInformation.Description"></span>
-    </div>
-    <div style="margin-top:10px;">
-        <button type="submit">Create</button>
-        <a asp-page="/Index">Back to List</a>
-    </div>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

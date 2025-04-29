@@ -1,105 +1,43 @@
 ﻿@page
-@model lab8.Pages.IndexModel
+@model lab9.Pages.CreateModel
 @{
-    ViewData["Title"] = "Class Information";
+    ViewData["Title"] = "Create Class";
 }
 
-<div class="container mt-4">
-    <!-- Üst kısım: "Add New Class" butonu ve başlık -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <a asp-page="/Create" class="btn btn-success">Add New Class</a>
-        <h1 class="mb-0">Class Information Table</h1>
+<h1>Create Class</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="ClassInformation.ClassName"></label>
+        <input asp-for="ClassInformation.ClassName" />
+        <span asp-validation-for="ClassInformation.ClassName"></span>
     </div>
-
-    <!-- Filtreleme Formu -->
-    <form method="get" class="mb-3">
-        <div class="input-group">
-            <input type="text" name="searchTerm" value="@Model.searchTerm" class="form-control" placeholder="Enter Class Name" />
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </form>
-
-    <!-- JSON Dışa Aktarma Butonları -->
-    <div class="mb-3">
-        <form method="post" asp-page-handler="ExportJson" class="d-inline-block me-2">
-            <input type="hidden" name="isFiltered" value="false" />
-            <button type="submit" class="btn btn-outline-secondary">Export All to JSON</button>
-        </form>
-        <form method="post" asp-page-handler="ExportJson" class="d-inline-block">
-            <input type="hidden" name="isFiltered" value="true" />
-            <button type="submit" class="btn btn-outline-secondary">Export Filtered to JSON</button>
-        </form>
+    <div>
+        <label asp-for="ClassInformation.Instructor"></label>
+        <input asp-for="ClassInformation.Instructor" />
+        <span asp-validation-for="ClassInformation.Instructor"></span>
     </div>
+    <div>
+        <label asp-for="ClassInformation.StartDate"></label>
+        <input asp-for="ClassInformation.StartDate" type="date" />
+        <span asp-validation-for="ClassInformation.StartDate"></span>
+    </div>
+    <div>
+        <label asp-for="ClassInformation.StudentCount"></label>
+        <input asp-for="ClassInformation.StudentCount" type="number" />
+        <span asp-validation-for="ClassInformation.StudentCount"></span>
+    </div>
+    <div>
+        <label asp-for="ClassInformation.Description"></label>
+        <input asp-for="ClassInformation.Description" />
+        <span asp-validation-for="ClassInformation.Description"></span>
+    </div>
+    <div style="margin-top:10px;">
+        <button type="submit">Create</button>
+        <a asp-page="/Index">Back to List</a>
+    </div>
+</form>
 
-    <!-- Kayıtların Gösterildiği Tablo -->
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Class Name</th>
-                <th>Instructor</th>
-                <th>Start Date</th>
-                <th>Student Count</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.ClassInformationModelList)
-            {
-                <tr>
-                    <td>@item.ClassName</td>
-                    <td>@item.Instructor</td>
-                    <td>@(item.StartDate != default ? item.StartDate.ToString("dd/MM/yyyy") : "")</td>
-                    <td>@item.StudentCount</td>
-                    <td>@item.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <!-- Sayfalama Navigasyonu -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            @if (Model.ClassInformationModelList.HasPreviousPage)
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-route-pageIndex="@(Model.ClassInformationModelList.PageIndex - 1)" asp-route-searchTerm="@Model.searchTerm">Previous</a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-            }
-
-            @for (int i = 1; i <= Model.ClassInformationModelList.TotalPages; i++)
-            {
-                if (i == Model.ClassInformationModelList.PageIndex)
-                {
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">@i</span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-route-pageIndex="@i" asp-route-searchTerm="@Model.searchTerm">@i</a>
-                    </li>
-                }
-            }
-
-            @if (Model.ClassInformationModelList.HasNextPage)
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-route-pageIndex="@(Model.ClassInformationModelList.PageIndex + 1)" asp-route-searchTerm="@Model.searchTerm">Next</a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item disabled">
-                    <span class="page-link">Next</span>
-                </li>
-            }
-        </ul>
-    </nav>
-</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

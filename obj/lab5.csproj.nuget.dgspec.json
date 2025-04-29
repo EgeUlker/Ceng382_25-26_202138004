@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj": {}
+    "C:\\Users\\egeum\\Desktop\\lab9\\lab5.csproj": {}
   },
   "projects": {
-    "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj": {
+    "C:\\Users\\egeum\\Desktop\\lab9\\lab5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj",
+        "projectUniqueName": "C:\\Users\\egeum\\Desktop\\lab9\\lab5.csproj",
         "projectName": "lab5",
-        "projectPath": "C:\\Users\\egeum\\Desktop\\lab8\\lab5.csproj",
+        "projectPath": "C:\\Users\\egeum\\Desktop\\lab9\\lab5.csproj",
         "packagesPath": "C:\\Users\\egeum\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\egeum\\Desktop\\lab8\\obj\\",
+        "outputPath": "C:\\Users\\egeum\\Desktop\\lab9\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\egeum\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -45,6 +45,12 @@
           "targetAlias": "net9.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.4, )"
             },

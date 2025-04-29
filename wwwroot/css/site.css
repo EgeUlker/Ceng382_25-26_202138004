@@ -1,31 +1,100 @@
+/* Google Font: Rubik uygulanıyor */
+body, h1, h2, h3, p, a {
+  font-family: 'Rubik', sans-serif;
+}
+
+/* Temel Ayarlar */
 html {
-  font-size: 14px;
+  font-size: 16px;
 }
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+  background: #fffdfe;
+  margin: 0;
+  padding-bottom: 100px; /* Footer için ekstra alan */
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Header, Navbar ve Genel Navigasyon */
+header .navbar {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.nav-link {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #ffe2e6 !important;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* Ana İçerik */
+main {
+  padding-top: 2rem;
+}
+
+/* Form Kartı */
+.form-card {
+  max-width: 600px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #c94b4b, #4b134f);
+}
+.form-card .card-body {
+  background: #ffffff;
+  color: #333;
+  padding: 2rem;
+}
+
+/* Form Elemanları */
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-control:focus {
+  border-color: #ff416c;
+  box-shadow: 0 0 8px rgba(255, 65, 108, 0.6);
+}
+
+/* Butonlar */
+.btn-primary {
+  background-color: #ff4b2b;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #ff416c;
+  transform: translateY(-2px);
+}
+.btn-outline-light {
+  border-color: #ff4b2b;
+  color: #ff4b2b;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-outline-light:hover {
+  background-color: #ff4b2b;
+  color: #fff;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
 }

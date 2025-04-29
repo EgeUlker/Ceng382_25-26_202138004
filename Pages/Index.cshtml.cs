@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using lab8.Data;
-using lab8.Helpers;
-using lab8.Models;
+using lab9.Data;
+using lab9.Helpers;
+using lab9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace lab8.Pages
+namespace lab9.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly SchoolDbContext _context;
         
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(SchoolDbContext context)
         {
             _context = context;
         }
@@ -27,8 +27,10 @@ namespace lab8.Pages
 
         public async Task OnGetAsync(int? pageIndex)
         {
+            // Veritabanından ClassInformationModels tablosunu sorguluyoruz.
             var query = _context.ClassInformationModels.AsQueryable();
 
+            // Arama terimi varsa, sorguya filtre ekliyoruz.
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 query = query.Where(c => c.ClassName.Contains(searchTerm));
@@ -42,6 +44,8 @@ namespace lab8.Pages
         public IActionResult OnPostExportJson(bool isFiltered)
         {
             IEnumerable<ClassInformationModel> data;
+
+            // Eğer filtreli dışa aktarım seçildiyse ve arama terimi boş değilse filtre uyguluyoruz
             if (isFiltered && !string.IsNullOrEmpty(searchTerm))
             {
                 data = _context.ClassInformationModels.Where(c => c.ClassName.Contains(searchTerm)).ToList();
@@ -52,6 +56,8 @@ namespace lab8.Pages
             }
 
             string jsonResult = Utils.Instance.ExportToJson(data);
+
+            // JSON dosyası olarak kullanıcıya geri gönderiyoruz.
             return File(System.Text.Encoding.UTF8.GetBytes(jsonResult), "application/json", "export.json");
         }
     }

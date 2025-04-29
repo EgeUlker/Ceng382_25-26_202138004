@@ -1,0 +1,32 @@
+@page
+@model lab9.Pages.Classes.CreateModel
+@{
+    ViewData["Title"] = "Create Class";
+}
+
+<h1>Create New Class</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="ClassInfo.Name" class="form-label"></label>
+        <input asp-for="ClassInfo.Name" class="form-control" />
+        <span asp-validation-for="ClassInfo.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ClassInfo.PersonCount" class="form-label"></label>
+        <input asp-for="ClassInfo.PersonCount" class="form-control" />
+        <span asp-validation-for="ClassInfo.PersonCount" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ClassInfo.Description" class="form-label"></label>
+        <textarea asp-for="ClassInfo.Description" class="form-control"></textarea>
+        <span asp-validation-for="ClassInfo.Description" class="text-danger"></span>
+    </div>
+    <div class="form-check mb-3">
+        <input asp-for="ClassInfo.IsActive" class="form-check-input" />
+        <label asp-for="ClassInfo.IsActive" class="form-check-label"></label>
+        <span asp-validation-for="ClassInfo.IsActive" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

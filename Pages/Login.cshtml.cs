@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using lab8.Models;
+using lab9.Models;
 using System.Text.Json;
 
-namespace lab8.Pages
+namespace lab9.Pages
 {
     public class LoginModel : PageModel
     {

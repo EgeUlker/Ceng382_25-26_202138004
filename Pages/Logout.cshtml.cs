@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace lab8.Pages
+namespace lab9.Pages
 {
     public class LogoutModel : PageModel
     {

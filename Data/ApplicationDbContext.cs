@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using lab8.Models;
+using lab9.Models;
 
-namespace lab8.Data
+namespace lab9.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -10,7 +10,10 @@ namespace lab8.Data
         {
         }
 
-        // Burada ClassInformationModel veritabanı varlığı olarak kullanılacak.
+        // Mevcut DbSet
         public DbSet<ClassInformationModel> ClassInformationModels { get; set; }
+
+        // Eğer Class entity'si de kullanılacaksa ekleyin:
+        public DbSet<Class> Classes { get; set; }
     }
 }

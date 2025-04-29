@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace lab8.Helpers
+namespace lab9.Helpers
 {
     public sealed class Utils
     {
